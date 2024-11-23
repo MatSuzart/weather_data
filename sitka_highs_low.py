@@ -11,8 +11,9 @@ reader = csv.reader(lines)
 header_row = next(reader)
 #print(header_row)
 
+#Extrai datas, temperaturas máximas e mínims
 #Extrai datas e temperaturas máximas
-dates,highs = [], []
+dates,highs = [], [], []
 
 '''for index, column_header in enumerate(header_row):
     print(index, column_header)'''
@@ -21,6 +22,7 @@ highs = []
 for row in reader:
     current_date = datetime.strtime(row[2],'%Y-%m-%d')
     high = int(row[4])
+    low = int(row[5])
     dates.append(current_date)
     highs.append(high)
 
