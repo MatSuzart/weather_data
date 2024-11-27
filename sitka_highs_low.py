@@ -13,7 +13,7 @@ header_row = next(reader)
 
 #Extrai datas, temperaturas máximas e mínims
 #Extrai datas e temperaturas máximas
-dates,highs = [], [], []
+dates,highs,lows = [], [], []
 
 '''for index, column_header in enumerate(header_row):
     print(index, column_header)'''
@@ -25,6 +25,7 @@ for row in reader:
     low = int(row[5])
     dates.append(current_date)
     highs.append(high)
+    lows.append(low)
 
 print(highs)
 
@@ -32,8 +33,9 @@ print(highs)
 plt.style.use('seaborn')
 sns.set()  # Adicionei seaborn
 fig, ax = plt.subplots()
-ax.plot(dates, highs, color='red')
-
+ax.plot(dates, highs, color='red',alpha=0.5)
+ax.plot(dates, lows, color='blue',alpha=0.5)
+ax.fill_between(dates,highs,lows,facecolor='blue',alpha=0.1)
 #Formata o gráfico
 ax.set_title("Daily High Temperatures July 2021", fontsize=24)
 ax.set_xlabel("Date", fontsize=16)  
