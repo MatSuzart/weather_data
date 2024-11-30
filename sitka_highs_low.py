@@ -21,11 +21,16 @@ dates,highs,lows = [], [], []
 highs = []
 for row in reader:
     current_date = datetime.strtime(row[2],'%Y-%m-%d')
-    high = int(row[4])
-    low = int(row[5])
-    dates.append(current_date)
-    highs.append(high)
-    lows.append(low)
+    try:
+
+        high = int(row[4])
+        low = int(row[5])
+    except ValueError:
+        print(f"Missing data for {current_date}")
+    else:
+        dates.append(current_date)
+        highs.append(high)
+        lows.append(low)
 
 print(highs)
 
@@ -37,7 +42,9 @@ ax.plot(dates, highs, color='red',alpha=0.5)
 ax.plot(dates, lows, color='blue',alpha=0.5)
 ax.fill_between(dates,highs,lows,facecolor='blue',alpha=0.1)
 #Formata o gráfico
-ax.set_title("Daily High Temperatures July 2021", fontsize=24)
+title = "Daily High Temperatures, 2021\nDeath Valley, CA"
+#ax.set_title("Daily High Temperatures July 2021", fontsize=24)
+ax.set_title(title,fontsize=20)
 ax.set_xlabel("Date", fontsize=16)  
 ax.set_ylabel("Temperature (F)", fontsize=16)
 ax.tick_params(labelsize=16)  
